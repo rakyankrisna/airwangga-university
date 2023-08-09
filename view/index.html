@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Mahasiswa</title>
+    <link rel="stylesheet" href="../view/style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Data Mahasiswa</h1>
+      <button onclick="fetchData()" class="center-button">
+        Tampilkan Semua Mahasiswa
+      </button>
+
+      <div class="search">
+        <input type="number" id="nimSearch" placeholder="Masukkan NIM" />
+        <button onclick="fetchDataByNim()">Cari Berdasarkan NIM</button>
+      </div>
+
+      <table id="data-table">
+        <thead>
+          <tr>
+            <th>NIM</th>
+            <th>Nama Lengkap</th>
+            <th>Alamat</th>
+            <th>Program Studi</th>
+            <th>Fakultas</th>
+            <th>Semester</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data akan ditampilkan di sini -->
+        </tbody>
+      </table>
+
+      <p id="no-data">Mahasiswa tidak ada</p>
+    </div>
+
+    <script src="../view/script.js"></script>
+  </body>
+</html>
