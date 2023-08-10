@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Dosen</title>
+    <link rel="stylesheet" href="../view/style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Data Dosen</h1>
+      <button onclick="fetchData()" class="center-button">
+        Tampilkan Semua Dosen
+      </button>
+
+      <div class="search">
+        <input type="number" id="nipSearch" placeholder="Masukkan NIP" />
+        <button onclick="fetchDataByNip()">Cari Berdasarkan NIP</button>
+      </div>
+
+      <table id="data-table">
+        <thead>
+          <tr>
+            <th>NIP</th>
+            <th>Nama Lengkap</th>
+            <th>Alamat</th>
+            <th>Program Studi</th>
+            <th>Fakultas</th>
+            <th>Gaji</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data akan ditampilkan di sini -->
+        </tbody>
+      </table>
+
+      <p id="no-data">Dosen tidak ada</p>
+    </div>
+
+    <script src="../view/dosen-script.js"></script>
+  </body>
+</html>
