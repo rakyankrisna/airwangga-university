@@ -89,6 +89,13 @@ input[type="text"] {
   border-radius: 5px;
 }
 
+.center-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Set to 100% of the viewport height */
+}
+
 .center-button {
   display: block;
   margin: 20px auto; /* Margin atas dan bawah 20px, kiri dan kanan otomatis */
