@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 9000;
 const bodyParser = require("body-parser");
 const db = require("./connection");
 const response = require("./response");
@@ -207,3 +207,5 @@ app.delete("/dosen", (req, res) => {
 app.listen(port, () => {
   console.log(`API listening on port ${port}`);
 });
+
+module.exports = app;
