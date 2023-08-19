@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Data Mahasiswa</title>
+    <link rel="stylesheet" href="../view/style.css" />
+  </head>
+
+  <body>
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -11,10 +15,7 @@
         <li><a href="dosen.html">Dosen</a></li>
       </ul>
     </nav>
-    <link rel="stylesheet" href="../view/style.css" />
-  </head>
 
-  <body>
     <div class="container">
       <h1>Data Mahasiswa</h1>
       <button onclick="fetchData()" class="center-button">
@@ -22,7 +23,12 @@
       </button>
 
       <div class="search">
-        <input type="number" id="nimSearch" placeholder="Masukkan NIM" />
+        <input
+          type="number"
+          id="nimSearch"
+          placeholder="Masukkan NIM"
+          onkeyup="handleKeyUp(event)"
+        />
         <button onclick="fetchDataByNim()">Cari Berdasarkan NIM</button>
       </div>
 
@@ -45,6 +51,6 @@
       <p id="no-data">Mahasiswa tidak ada</p>
     </div>
 
-    <script src="../view/script.js"></script>
+    <script src="../view/mahasiswa-script.js"></script>
   </body>
 </html>

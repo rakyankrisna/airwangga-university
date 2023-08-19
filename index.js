@@ -16,16 +16,25 @@ app.get("/", (req, res) => {
   response(200, data, "This is homepage!", res);
 });
 
-app.post("/", (req, res) => {
-  response(200, "data", "Post to Home", res);
+app.get("/findMahasiswa", (req, res) => {
+  const sql = `SELECT * FROM mahasiswa WHERE nim = ${req.query.nim}`;
+  db.query(sql, (error, result) => {
+    response(200, result, "Find mahasiswa name", res);
+  });
 });
 
-app.put("/", (req, res) => {
-  response(200, "data", "Put atau Edit to Home", res);
+app.get("/findDosen", (req, res) => {
+  const sql = `SELECT * FROM dosen WHERE nip = ${req.query.nip}`;
+  db.query;
+  db.query(sql, (error, result) => {
+    response(200, result, "Find dosen name", res);
+  });
 });
 
-app.delete("/", (req, res) => {
-  response(200, "data", "Delete to Home", res);
+app.get("/date", (req, res) => {
+  res.writeHead(200, { "Content-Type": "text/html" });
+  res.write("The date and time are currently: " + dt.myDateTime());
+  res.end();
 });
 
 app.get("/mahasiswa", (req, res) => {
@@ -33,61 +42,6 @@ app.get("/mahasiswa", (req, res) => {
     //hasil
     if (error) throw error;
     response(200, result, "GET all data from mahasiswa", res);
-  });
-});
-
-app.post("/mahasiswa", (req, res) => {
-  const { nim, nama_lengkap, alamat, program_studi, fakultas, semester } =
-    req.body;
-  console.log(req.body);
-  const sql = `INSERT INTO mahasiswa (nim, nama_lengkap, alamat, program_studi, fakultas, semester) VALUES (${nim}, '${nama_lengkap}', '${alamat}', '${program_studi}', '${fakultas}', ${semester})`;
-  db.query(sql, (error, result) => {
-    if (error) response(500, "Invalid", "error", res);
-    if (result?.affectedRows) {
-      const data = {
-        isSuccess: result.affectedRows,
-      };
-      response(200, data, "Post new data to mahasiswa", res);
-    } else {
-      response(500, "Data can't inputed", "Error message", res);
-    }
-  });
-});
-
-app.put("/mahasiswa", (req, res) => {
-  const { nim, nama_lengkap, alamat, program_studi, fakultas, semester } =
-    req.body;
-  const sql = `UPDATE mahasiswa SET nama_lengkap = '${nama_lengkap}',alamat = '${alamat}',program_studi = '${program_studi}',fakultas = '${fakultas}',semester = ${semester} WHERE nim = ${nim}`;
-  db.query(sql, (error, result) => {
-    if (error) response(500, "Invalid", "error", res);
-    if (result?.affectedRows) {
-      const data = {
-        isSuccess: result.affectedRows,
-        message: result.message,
-      };
-      response(200, data, "Put atau Edit to Mahasiswa Successfully", res);
-    } else {
-      response(404, "User not Found", "error", res);
-    }
-  });
-});
-
-app.delete("/mahasiswa", (req, res) => {
-  const { nim, nama_lengkap, alamat, program_studi, fakultas, semester } =
-    req.body;
-  const sql = `DELETE FROM mahasiswa WHERE nim = ${nim}`;
-  db.query(sql, (error, result) => {
-    if (error) response(500, "Invalid", "error", res);
-    console.log(result);
-    if (result?.affectedRows) {
-      const data = {
-        isDeleted: result.affectedRows,
-        message: result.message,
-      };
-      response(200, data, "Delete Mahasiswa Successfully", res);
-    } else {
-      response(404, "User not Found", "error", res);
-    }
   });
 });
 
@@ -133,6 +87,41 @@ app.get("/contents", (req, res) => {
   response(200, "Content Data", "This is your content page!", res);
 });
 
+app.post("/mahasiswa", (req, res) => {
+  const { nim, nama_lengkap, alamat, program_studi, fakultas, semester } =
+    req.body;
+  console.log(req.body);
+  const sql = `INSERT INTO mahasiswa (nim, nama_lengkap, alamat, program_studi, fakultas, semester) VALUES (${nim}, '${nama_lengkap}', '${alamat}', '${program_studi}', '${fakultas}', ${semester})`;
+  db.query(sql, (error, result) => {
+    if (error) response(500, "Invalid", "error", res);
+    if (result?.affectedRows) {
+      const data = {
+        isSuccess: result.affectedRows,
+      };
+      response(200, data, "Post new data to mahasiswa", res);
+    } else {
+      response(500, "Data can't inputed", "Error message", res);
+    }
+  });
+});
+
+app.post("/dosen", (req, res) => {
+  const { nip, nama_lengkap, alamat, program_studi, fakultas, gaji } = req.body;
+  console.log(req.body);
+  const sql = `INSERT INTO dosen (nip, nama_lengkap, alamat, program_studi, fakultas, gaji) VALUES (${nip}, '${nama_lengkap}', '${alamat}', '${program_studi}', '${fakultas}', ${gaji})`;
+  db.query(sql, (error, result) => {
+    if (error) response(500, "Invalid", "error", res);
+    if (result?.affectedRows) {
+      const data = {
+        isSuccess: result.affectedRows,
+      };
+      response(200, data, "Post new data to dosen", res);
+    } else {
+      response(500, "Data can't inputed", "Error message", res);
+    }
+  });
+});
+
 app.post("/login", (req, res) => {
   console.log({ requestFromOutside: req.body });
   response(200, "Data Login", "Login berhasil!", res);
@@ -143,25 +132,76 @@ app.put("/username", (req, res) => {
   response(200, "This is update username", "Update berhasil!", res);
 });
 
-app.get("/findMahasiswa", (req, res) => {
-  const sql = `SELECT * FROM mahasiswa WHERE nim = ${req.query.nim}`;
+app.put("/mahasiswa", (req, res) => {
+  const { nim, nama_lengkap, alamat, program_studi, fakultas, semester } =
+    req.body;
+  const sql = `UPDATE mahasiswa SET nama_lengkap = '${nama_lengkap}',alamat = '${alamat}',program_studi = '${program_studi}',fakultas = '${fakultas}',semester = ${semester} WHERE nim = ${nim}`;
   db.query(sql, (error, result) => {
-    response(200, result, "Find mahasiswa name", res);
+    if (error) response(500, "Invalid", "error", res);
+    if (result?.affectedRows) {
+      const data = {
+        isSuccess: result.affectedRows,
+        message: result.message,
+      };
+      response(200, data, "Put atau Edit to Mahasiswa Successfully", res);
+    } else {
+      response(404, "User not Found", "error", res);
+    }
   });
 });
 
-app.get("/findDosen", (req, res) => {
-  const sql = `SELECT * FROM dosen WHERE nip = ${req.query.nip}`;
-  db.query;
+app.put("/dosen", (req, res) => {
+  const { nip, nama_lengkap, alamat, program_studi, fakultas, gaji } = req.body;
+  const sql = `UPDATE mahasiswa SET nama_lengkap = '${nama_lengkap}',alamat = '${alamat}',program_studi = '${program_studi}',fakultas = '${fakultas}',gaji = ${gaji} WHERE nip = ${nip}`;
   db.query(sql, (error, result) => {
-    response(200, result, "Find dosen name", res);
+    if (error) response(500, "Invalid", "error", res);
+    if (result?.affectedRows) {
+      const data = {
+        isSuccess: result.affectedRows,
+        message: result.message,
+      };
+      response(200, data, "Put atau Edit to Mahasiswa Successfully", res);
+    } else {
+      response(404, "User not Found", "error", res);
+    }
   });
 });
 
-app.get("/date", (req, res) => {
-  res.writeHead(200, { "Content-Type": "text/html" });
-  res.write("The date and time are currently: " + dt.myDateTime());
-  res.end();
+app.delete("/mahasiswa", (req, res) => {
+  const { nim, nama_lengkap, alamat, program_studi, fakultas, semester } =
+    req.body;
+  const sql = `DELETE FROM mahasiswa WHERE nim = ${nim}`;
+  db.query(sql, (error, result) => {
+    if (error) response(500, "Invalid", "error", res);
+    console.log(result);
+    if (result?.affectedRows) {
+      const data = {
+        isDeleted: result.affectedRows,
+        message: result.message,
+      };
+      response(200, data, "Delete Mahasiswa Successfully", res);
+    } else {
+      response(404, "User not Found", "error", res);
+    }
+  });
+});
+
+app.delete("/dosen", (req, res) => {
+  const { nip, nama_lengkap, alamat, program_studi, fakultas, gaji } = req.body;
+  const sql = `DELETE FROM dosen WHERE nip = ${nip}`;
+  db.query(sql, (error, result) => {
+    if (error) response(500, "Invalid", "error", res);
+    console.log(result);
+    if (result?.affectedRows) {
+      const data = {
+        isDeleted: result.affectedRows,
+        message: result.message,
+      };
+      response(200, data, "Delete Dosen Successfully", res);
+    } else {
+      response(404, "User not Found", "error", res);
+    }
+  });
 });
 
 app.listen(port, () => {

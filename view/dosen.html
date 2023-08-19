@@ -22,7 +22,12 @@
       </button>
 
       <div class="search">
-        <input type="number" id="nipSearch" placeholder="Masukkan NIP" />
+        <input
+          type="number"
+          id="nipSearch"
+          placeholder="Masukkan NIP"
+          onkeyup="handleKeyUp(event)"
+        />
         <button onclick="fetchDataByNip()">Cari Berdasarkan NIP</button>
       </div>
 

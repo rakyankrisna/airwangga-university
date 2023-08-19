@@ -47,3 +47,9 @@ function renderTable(data) {
     noDataMessage.style.display = "block";
   }
 }
+
+function handleKeyUp(event) {
+  if (event.keyCode === 13) {
+    fetchDataByNim();
+  }
+}
