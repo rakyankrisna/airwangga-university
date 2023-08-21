@@ -152,7 +152,7 @@ app.put("/mahasiswa", (req, res) => {
 
 app.put("/dosen", (req, res) => {
   const { nip, nama_lengkap, alamat, program_studi, fakultas, gaji } = req.body;
-  const sql = `UPDATE mahasiswa SET nama_lengkap = '${nama_lengkap}',alamat = '${alamat}',program_studi = '${program_studi}',fakultas = '${fakultas}',gaji = ${gaji} WHERE nip = ${nip}`;
+  const sql = `UPDATE dosen SET nama_lengkap = '${nama_lengkap}',alamat = '${alamat}',program_studi = '${program_studi}',fakultas = '${fakultas}',gaji = ${gaji} WHERE nip = ${nip}`;
   db.query(sql, (error, result) => {
     if (error) response(500, "Invalid", "error", res);
     if (result?.affectedRows) {
@@ -160,7 +160,7 @@ app.put("/dosen", (req, res) => {
         isSuccess: result.affectedRows,
         message: result.message,
       };
-      response(200, data, "Put atau Edit to Mahasiswa Successfully", res);
+      response(200, data, "Put atau Edit to Dosen Successfully", res);
     } else {
       response(404, "User not Found", "error", res);
     }
