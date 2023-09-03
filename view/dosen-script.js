@@ -3,7 +3,7 @@ const noDataMessage = document.getElementById("no-data");
 
 async function fetchData() {
   try {
-    const response = await fetch("http://localhost:3000/dosen");
+    const response = await fetch("http://localhost:9000/dosen");
     const data = await response.json();
     renderTable(data.payload.datas);
   } catch (error) {
@@ -19,7 +19,7 @@ async function fetchDataByNip() {
   }
 
   try {
-    const response = await fetch(`http://localhost:3000/dosen/${nip}`);
+    const response = await fetch(`http://localhost:9000/dosen/${nip}`);
     const data = await response.json();
     renderTable(data.payload.datas);
   } catch (error) {
