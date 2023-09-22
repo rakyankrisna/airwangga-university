@@ -39,6 +39,12 @@ function renderTable(data) {
                             <td>${item.program_studi}</td>
                             <td>${item.fakultas}</td>
                             <td>${item.gaji}</td>
+                            <td style="valign: center;">
+                              <button onclick="editData(${item.nip})">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3429/3429924.png" alt="Settings" style="width:  20px; height: 20px;" />
+                                <p style="color: white;">Settings</p>
+                              </button>
+                            </td>
                         </tr>
                     `;
     });
