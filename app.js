@@ -14,21 +14,7 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   const currentTime = dt.myDateTime();
   const data = `Welcome to Airwangga University! Current time is ${currentTime}`;
-  response(200, data, "This is homepage!", res);
-});
-
-app.get("/html", (req, res) => {
-  // Use path.join to construct the correct file path
-  const indexPath = path.join(__dirname, "view", "index.html");
-
-  // Send the HTML file as a response
-  res.sendFile(indexPath, (err) => {
-    if (err) {
-      // Handle any errors that may occur
-      console.error(err);
-      res.status(500).send("Internal Server Error");
-    }
-  });
+  response(200, data, "Welcome to learn!", res);
 });
 
 app.get("/findMahasiswa", (req, res) => {
