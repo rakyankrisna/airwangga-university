@@ -59,3 +59,45 @@ function handleKeyUp(event) {
     fetchDataByNim();
   }
 }
+
+function editData(nim) {
+  // Retrieve the updated data from the user (e.g., through a form)
+  const nama_lengkap = document.getElementById("nama_lengkap").value;
+  const alamat = document.getElementById("alamat").value;
+  const program_studi = document.getElementById("program_studi").value;
+  const fakultas = document.getElementById("fakultas").value;
+  const semester = document.getElementById("semester").value;
+
+  // Create the request body with the updated data
+  const data = {
+    nim,
+    nama_lengkap,
+    alamat,
+    program_studi,
+    fakultas,
+    semester,
+  };
+
+  // Send the PUT request to the server endpoint
+  fetch("/mahasiswa", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      if (result.isSuccess) {
+        // Handle the successful response
+        console.log("Put atau Edit to Mahasiswa Successfully");
+      } else {
+        // Handle the response when the user is not found
+        console.log("User not Found");
+      }
+    })
+    .catch((error) => {
+      // Handle any errors that occurred during the request
+      console.error("Error:", error);
+    });
+}
